@@ -1,10 +1,9 @@
 import logo from './logo.svg';
-import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Country Quiz</h1>
+    <div className="h-screen bg-purple-pattern bg-cover bg-center flex items-center justify-center font-poppins">
+      <h1 className="text-white">Country Quiz</h1>
     </div>
   );
 }
