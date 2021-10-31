@@ -14,6 +14,16 @@ module.exports = {
         poppins: ["Poppins", "sans-serif"],
         montserrat: ["Montserrat", "sans-serif"],
       },
+      colors: {
+        primary: {
+          light: "#6066D0CC",
+          dark: "#2F527B",
+          darker: "#1D355D",
+        },
+        green: "#60BF88",
+        red: "#EA8282",
+        orange: "#F9A826",
+      },
     },
   },
   variants: {
