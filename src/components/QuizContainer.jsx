@@ -30,7 +30,7 @@ const QuizContainer = () => {
         </div>
       </div>
       <div className="flex justify-end mt-10 px-10">
-          <button className="bg-orange text-white py-2 px-3 rounded-lg text-lg font-bold">Next</button>
+          <button className="bg-orange text-white py-2 px-3 rounded-lg text-lg font-bold hover:-translate-y-1 transform">Next</button>
       </div>
     </div>
   );
