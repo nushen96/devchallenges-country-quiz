@@ -1,4 +1,5 @@
 import QuizContainer from "./components/QuizContainer";
+import {questions} from "./utilities/questions"
 
 function App() {
   return (
@@ -7,7 +8,7 @@ function App() {
         <h1 className="uppercase text-white font-bold text-2xl mb-2">
           Country quiz
         </h1>
-        <QuizContainer/>
+        <QuizContainer question={questions[1]}/>
       </div>
     </div>
   );

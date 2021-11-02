@@ -1,3 +1,4 @@
+import { useState, useContext } from "react";
 import cardImage from "../resources/images/undraw_adventure_4hum 1.svg";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { FaRegTimesCircle } from "react-icons/fa";
@@ -24,7 +25,11 @@ const QuizAnswer = ({ letter, text, status }) => {
   );
 };
 
-const QuizContainer = () => {
+const QuizContainer = ({
+  question: { _id, label, flag, answers, correctAnswer },
+}) => {
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [isAnswered, setIsAnswered] = useState(false);
   return (
     <div className="bg-white pb-14 rounded-xl">
       <div className="relative bottom-16 ml-full flex justify-end">
@@ -36,12 +41,20 @@ const QuizContainer = () => {
       </div>
 
       <div className="-mt-16 px-10">
-        <h2 className="text-xl font-bold mb-4 text-primary-dark">Question</h2>
+      {flag && (
+          <div className="mb-3">
+            <img className="w-20 h-20" src={flag} alt={`Question ${_id} flag`} />
+          </div>
+        )}
+        <h2 className="text-xl font-bold mb-4 text-primary-dark">{label}</h2>
         <div className="space-y-3">
-          <QuizAnswer letter="A" text="answer A" status="wrong" />
-          <QuizAnswer letter="B" text="answer B" status="correct" />
-          <QuizAnswer letter="C" text="answer C" />
-          <QuizAnswer letter="D" text="answer D" />
+          {answers.map((answer) => (
+            <QuizAnswer
+              id={answer.letter}
+              letter={answer.letter}
+              text={answer.text}
+            />
+          ))}
         </div>
       </div>
       <div className="flex justify-end mt-10 px-10">
