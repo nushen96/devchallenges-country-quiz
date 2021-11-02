@@ -36,8 +36,7 @@ const QuizContainer = ({
   const [isAnswered, setIsAnswered] = useState(false);
 
   const checkAnswer = (selectedAnswer) => {
-    console.log("YAAAAAAAAAA !!!");
-    //setIsAnswered(true)
+    setIsAnswered(true)
     const correctAnswerIndex = answers.findIndex(answer => answer.letter===correctAnswer)
     const selectedAnswerIndex = answers.findIndex(answer => answer.letter===selectedAnswer)
     console.log(correctAnswerIndex, selectedAnswerIndex)
