@@ -3,10 +3,10 @@ import cardImage from "../resources/images/undraw_adventure_4hum 1.svg";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { FaRegTimesCircle } from "react-icons/fa";
 
-const QuizAnswer = ({ letter, text, status, disabled }) => {
+const QuizAnswer = ({ letter, text, status, disabled, checkAnswer }) => {
   let answerBaseStyles = "flex items-center px-3 py-2 rounded-lg ";
-  if(disabled) {
-    answerBaseStyles += "pointer-events-none "
+  if (disabled) {
+    answerBaseStyles += "pointer-events-none ";
   }
   let endIcon = null;
   if (status === "wrong") {
@@ -20,7 +20,7 @@ const QuizAnswer = ({ letter, text, status, disabled }) => {
       "border border-primary-light text-primary-light cursor-pointer hover:border-transparent hover:bg-orange hover:text-white";
   }
   return (
-    <div className={answerBaseStyles}>
+    <div className={answerBaseStyles} onClick={() => checkAnswer(letter)}>
       <h3>{letter}</h3>
       <p className="flex-1 pl-5">{text}</p>
       {endIcon}
@@ -33,21 +33,21 @@ const QuizContainer = ({
   score,
   setScore,
 }) => {
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
 
-  const checkAnswer = () => {
-    console.log("YAAAAAAAAAA !!!")
-    // setIsAnswered(true)
-    // const correctAnswerIndex = answers.findIndex(answer => answer.letter===correctAnswer)
-    // const selectedAnswerIndex = answers.findIndex(answer => answer.letter===selectedAnswer)
-    // if(selectedAnswer ===  correctAnswer) {
-    //   setScore(score+1)
-    // } else {
-    //   answers[selectedAnswerIndex]["status"] = "wrong"
-    // }
-    // answers[correctAnswerIndex]["status"] = "correct"
-  }
+  const checkAnswer = (selectedAnswer) => {
+    console.log("YAAAAAAAAAA !!!");
+    //setIsAnswered(true)
+    const correctAnswerIndex = answers.findIndex(answer => answer.letter===correctAnswer)
+    const selectedAnswerIndex = answers.findIndex(answer => answer.letter===selectedAnswer)
+    console.log(correctAnswerIndex, selectedAnswerIndex)
+    answers[correctAnswerIndex]["status"] = "correct"
+    if(selectedAnswerIndex ===  correctAnswerIndex) {
+      setScore(score+1)
+    } else {
+      answers[selectedAnswerIndex]["status"] = "wrong"
+    }
+  };
 
   return (
     <div className="bg-white pb-14 rounded-xl">
@@ -58,7 +58,6 @@ const QuizContainer = ({
           alt="Card header"
         />
       </div>
-
       <div className="-mt-16 px-10">
         {flag && (
           <div className="mb-3">
@@ -78,7 +77,7 @@ const QuizContainer = ({
               text={answer.text}
               status={answer.status}
               disabled={isAnswered}
-              onClick={() => checkAnswer(answer.letter)}
+              checkAnswer={checkAnswer}
             />
           ))}
         </div>
