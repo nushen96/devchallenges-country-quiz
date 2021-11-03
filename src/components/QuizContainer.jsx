@@ -55,10 +55,6 @@ const QuizContainer = ({
     getNextQuestion()
   }
 
-  // useEffect(() => {
-  //   setIsAnswered(false)
-  // }, [question])
-
   return (
     <div className="bg-white pb-14 rounded-xl">
       <div className="relative bottom-16 ml-full flex justify-end">
