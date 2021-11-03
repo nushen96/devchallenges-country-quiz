@@ -21,13 +21,13 @@ function App() {
     } else {
       setHasQuizFinished(true);
     }
-  }
+  };
 
   const restart = () => {
-    setHasQuizFinished(false)
-    setScore(0)
-    setCurrentQuestionIndex(0)
-  }
+    setHasQuizFinished(false);
+    setScore(0);
+    setCurrentQuestionIndex(0);
+  };
 
   return (
     <div className="h-screen bg-purple-pattern bg-cover bg-center flex items-center justify-center font-poppins">
@@ -35,15 +35,18 @@ function App() {
         <h1 className="uppercase text-white font-bold text-2xl mb-2">
           Country quiz
         </h1>
-        {/* <QuizContainer
-          question={currentQuestion}
-          score={score}
-          setScore={setScore}
-          currentQuestionIndex={currentQuestionIndex}
-          setCurrentQuestionIndex={setCurrentQuestionIndex}
-          getNextQuestion={getNextQuestion}
-        /> */}
-        <ResultsContainer score={score} restart={restart}/>
+        {hasQuizFinished ? (
+          <ResultsContainer score={score} restart={restart} />
+        ) : (
+          <QuizContainer
+            question={currentQuestion}
+            score={score}
+            setScore={setScore}
+            currentQuestionIndex={currentQuestionIndex}
+            setCurrentQuestionIndex={setCurrentQuestionIndex}
+            getNextQuestion={getNextQuestion}
+          />
+        )}
       </div>
     </div>
   );

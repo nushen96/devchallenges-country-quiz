@@ -5,7 +5,7 @@ const ResultsContainer = ({score, restart}) => {
         <img className="h-48 w-48" src={ResultsImage} alt="Results illustration" />
         <div className="space-y-3 text-center">
             <h1 className="font-bold text-2xl">Results</h1>
-            <p>You got <span className="text-green">{score}</span> correct answer{score>0 ? "s":""}</p>
+            <p className="text-sm">You got <span className="text-green text-xl font-semibold">{score}</span> correct answer{score>0 ? "s":""}</p>
         </div>
         <button className="border-2 border-primary-darker py-3 px-10 rounded-lg font-semibold text-sm hover:bg-gray-100" onClick={() => restart()}>Try again</button>
     </div>)
