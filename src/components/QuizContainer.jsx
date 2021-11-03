@@ -4,6 +4,7 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import { FaRegTimesCircle } from "react-icons/fa";
 
 const QuizAnswer = ({ letter, text, status, disabled, checkAnswer }) => {
+
   let answerBaseStyles = "flex items-center px-3 py-2 rounded-lg ";
   if (disabled) {
     answerBaseStyles += "pointer-events-none ";
@@ -32,6 +33,7 @@ const QuizContainer = ({
   question: { _id, label, flag, answers, correctAnswer },
   score,
   setScore,
+  getNextQuestion
 }) => {
   const [isAnswered, setIsAnswered] = useState(false);
 
@@ -47,6 +49,15 @@ const QuizContainer = ({
       answers[selectedAnswerIndex]["status"] = "wrong"
     }
   };
+
+  const nextQuestion = () => {
+    setIsAnswered(false)
+    getNextQuestion()
+  }
+
+  // useEffect(() => {
+  //   setIsAnswered(false)
+  // }, [question])
 
   return (
     <div className="bg-white pb-14 rounded-xl">
@@ -82,7 +93,7 @@ const QuizContainer = ({
         </div>
       </div>
       <div className="flex justify-end mt-10 px-10">
-        <button className="bg-orange text-white py-2 px-3 rounded-lg text-lg font-bold hover:-translate-y-1 transform">
+        <button className="bg-orange text-white py-2 px-3 rounded-lg text-lg font-bold hover:-translate-y-1 transform" onClick={() => nextQuestion()}>
           Next
         </button>
       </div>

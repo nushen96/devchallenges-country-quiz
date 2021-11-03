@@ -1,11 +1,27 @@
-import {useState} from "react"
+import { useState, useEffect } from "react";
 import QuizContainer from "./components/QuizContainer";
-import {questions} from "./utilities/questions"
+import { questions } from "./utilities/questions";
 
 function App() {
-  const [currentQuestion,setCurrentQuestion] = useState(questions[0])
-  const [score, setScore] = useState(0)
-  
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState(questions[0]);
+  const [hasQuizFinished, setHasQuizFinished] = useState(false);
+  const [score, setScore] = useState(0);
+
+  useEffect(() => {
+    if (currentQuestionIndex < questions.length) {
+      setCurrentQuestion(questions[currentQuestionIndex]);
+    }
+  }, [currentQuestionIndex]);
+
+  const getNextQuestion = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      setHasQuizFinished(true);
+    }
+  }
+
   // const checkAnswer = (givenAnswer) => {
   //   console.log("YAAAAAAAAAA !!!")
   //   currentQuestion.isAnswered = true
@@ -25,7 +41,14 @@ function App() {
         <h1 className="uppercase text-white font-bold text-2xl mb-2">
           Country quiz
         </h1>
-        <QuizContainer question={currentQuestion} score={score} setScore={setScore}/>
+        <QuizContainer
+          question={currentQuestion}
+          score={score}
+          setScore={setScore}
+          currentQuestionIndex={currentQuestionIndex}
+          setCurrentQuestionIndex={setCurrentQuestionIndex}
+          getNextQuestion={getNextQuestion}
+        />
       </div>
     </div>
   );
