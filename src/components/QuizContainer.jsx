@@ -4,7 +4,6 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import { FaRegTimesCircle } from "react-icons/fa";
 
 const QuizAnswer = ({ letter, text, status, disabled, checkAnswer }) => {
-
   let answerBaseStyles = "flex items-center px-3 py-2 rounded-lg ";
   if (disabled) {
     answerBaseStyles += "pointer-events-none ";
@@ -33,27 +32,27 @@ const QuizContainer = ({
   question: { _id, label, flag, answers, correctAnswer },
   score,
   setScore,
-  getNextQuestion
+  getNextQuestion,
 }) => {
   const [isAnswered, setIsAnswered] = useState(false);
+  const [corrections, setCorrections] = useState({});
 
   const checkAnswer = (selectedAnswer) => {
-    setIsAnswered(true)
-    const correctAnswerIndex = answers.findIndex(answer => answer.letter===correctAnswer)
-    const selectedAnswerIndex = answers.findIndex(answer => answer.letter===selectedAnswer)
-    console.log(correctAnswerIndex, selectedAnswerIndex)
-    answers[correctAnswerIndex]["status"] = "correct"
-    if(selectedAnswerIndex ===  correctAnswerIndex) {
-      setScore(score+1)
+    setIsAnswered(true);
+    setCorrections((c) => ({ ...c, [correctAnswer]: "correct" }));
+    if (selectedAnswer === correctAnswer) {
+      setScore(score + 1);
     } else {
-      answers[selectedAnswerIndex]["status"] = "wrong"
+      setCorrections((c) => ({ ...c, [selectedAnswer]: "wrong" }));
+      console.log({ selectedAnswer, correctAnswer });
     }
   };
 
   const nextQuestion = () => {
-    setIsAnswered(false)
-    getNextQuestion()
-  }
+    setIsAnswered(false);
+    setCorrections({});
+    getNextQuestion();
+  };
 
   return (
     <div className="bg-white pb-14 rounded-xl">
@@ -81,7 +80,7 @@ const QuizContainer = ({
               key={answer.letter}
               letter={answer.letter}
               text={answer.text}
-              status={answer.status}
+              status={corrections[answer.letter] || null}
               disabled={isAnswered}
               checkAnswer={checkAnswer}
             />
@@ -89,7 +88,10 @@ const QuizContainer = ({
         </div>
       </div>
       <div className="flex justify-end mt-10 px-10">
-        <button className="bg-orange text-white py-2 px-3 rounded-lg text-lg font-bold hover:-translate-y-1 transform" onClick={() => nextQuestion()}>
+        <button
+          className="bg-orange text-white py-2 px-3 rounded-lg text-lg font-bold hover:-translate-y-1 transform"
+          onClick={() => nextQuestion()}
+        >
           Next
         </button>
       </div>

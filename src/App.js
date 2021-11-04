@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import QuizContainer from "./components/QuizContainer";
 import ResultsContainer from "./components/ResultsContainer";
-import { questions } from "./utilities/questions";
+import { questionsData } from "./utilities/questions";
 
 function App() {
+  const [questions, setQuestions] = useState([ ...questionsData]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(questions[0]);
   const [hasQuizFinished, setHasQuizFinished] = useState(false);
@@ -26,6 +27,8 @@ function App() {
   const restart = () => {
     setHasQuizFinished(false);
     setScore(0);
+    setQuestions([ ...questionsData ]);
+    console.log(questions)
     setCurrentQuestionIndex(0);
   };
 

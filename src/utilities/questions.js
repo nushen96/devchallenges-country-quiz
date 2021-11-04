@@ -1,6 +1,6 @@
 import question2flag from "../resources/images/question2_flag.png"
 
-export const questions = [
+export const questionsData = [
   {
     _id: 1,
     label: "Kuala Lumpur is the capital of",
