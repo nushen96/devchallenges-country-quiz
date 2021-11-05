@@ -4,7 +4,7 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import { FaRegTimesCircle } from "react-icons/fa";
 
 const QuizAnswer = ({ letter, text, status, disabled, checkAnswer }) => {
-  let answerBaseStyles = "flex items-center px-3 py-2 rounded-lg ";
+  let answerBaseStyles = "flex items-center px-3 py-2 rounded-lg lg:px-4 lg:py-3 ";
   if (disabled) {
     answerBaseStyles += "pointer-events-none ";
   }
@@ -21,8 +21,8 @@ const QuizAnswer = ({ letter, text, status, disabled, checkAnswer }) => {
   }
   return (
     <div className={answerBaseStyles} onClick={() => checkAnswer(letter)}>
-      <h3>{letter}</h3>
-      <p className="flex-1 pl-5">{text}</p>
+      <h3 className="lg:text-lg">{letter}</h3>
+      <p className="flex-1 pl-5 lg:text-lg">{text}</p>
       {endIcon}
     </div>
   );
@@ -73,8 +73,8 @@ const QuizContainer = ({
             />
           </div>
         )}
-        <h2 className="text-xl font-bold mb-4 text-primary-dark">{label}</h2>
-        <div className="space-y-3">
+        <h2 className="text-xl font-bold mb-4 text-primary-dark lg:text-2xl">{label}</h2>
+        <div className="space-y-3 lg:space-y-4">
           {answers.map((answer) => (
             <QuizAnswer
               key={answer.letter}
@@ -89,7 +89,7 @@ const QuizContainer = ({
       </div>
       <div className="flex justify-end mt-10 px-10">
         <button
-          className="bg-orange text-white py-2 px-3 rounded-lg text-lg font-bold hover:-translate-y-1 transform"
+          className="bg-orange text-white py-2 px-3 rounded-lg text-lg font-bold hover:-translate-y-1 transform lg:py-3 lg:px-5 lg:text-xl"
           onClick={() => nextQuestion()}
         >
           Next
