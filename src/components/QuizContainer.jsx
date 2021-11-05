@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import cardImage from "../resources/images/undraw_adventure_4hum 1.svg";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { FaRegTimesCircle } from "react-icons/fa";
